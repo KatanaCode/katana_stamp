@@ -1,16 +1,10 @@
 require "katana_stamp"
-
 require "active_support"
+require "fileutils"
 
 def clear_files
-  Dir.glob('**/test_*.rb').each do |path|
-    File.open(path, 'r+') do |file|
-      path = path.split('/').last.gsub(/\.rb/, '')        
-      file.write <<-EOF
-class #{ActiveSupport::Inflector.camelize(path, true)}
-
-end
-      EOF
-    end
+  Dir.glob('spec/templates/**/*.rb') do |path|
+    new_path = path.gsub(/spec\/templates\//, '')
+    FileUtils.cp(path, new_path)
   end
 end

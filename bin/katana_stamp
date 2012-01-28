@@ -7,16 +7,17 @@ require 'katana_stamp'
 require 'optparse'
 
 options = {}
+
 OptionParser.new do |opts|
-  opts.banner = "Usage: katana_stamp -i"
+  opts.banner = File.read('README.md')
 
   opts.on("-i", "--include-dirs x,y,x", Array, 
-    "Include these dirs or files in stamp list") do |v|
+    "Include these dir patterns in stamp list") do |v|
     options[:include_paths] = v
   end
   
   opts.on("-x", "--exclude-dirs x,y,x", Array, 
-    "Don't include these dirs or files in stamp list") do |v|
+    "Don't include these dir patterns in stamp list") do |v|
     options[:exclude_paths] = v
   end
   
@@ -28,5 +29,10 @@ OptionParser.new do |opts|
     options[:owner] = v
   end
   
+  opts.on("-m", "--message MESSAGE", "Overwrite the entire message.") do |v|
+    options[:message] = v
+  end
+  
 end.parse!
+
 KatanaStamp.run!(options)

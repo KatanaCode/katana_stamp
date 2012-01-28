@@ -2,14 +2,14 @@ module KatanaStamp
 
   class CustomFile < Struct.new(:path, :options)
     
-    COPYRIGHT_NOTICE = "# (c) Copyright %s %s. All Rights Reserved."
+    COPYRIGHT_NOTICE = "(c) Copyright %s %s. All Rights Reserved."
 
     def stamp
-      `echo "#{"\n" unless has_closing_break?}#{message}" >> #{path}`
+      `echo "#{"\n" unless has_closing_break?}# #{message}" >> #{path}`
     end
     
     def message
-      options[:year] ||= Time.now.year
+      options[:year]  ||= Time.now.year
       options[:owner] ||= 'Katana Code Ltd'      
       message = options[:message] || COPYRIGHT_NOTICE % [options[:year], options[:owner]]
     end
@@ -27,7 +27,6 @@ module KatanaStamp
     def last_char
       last_line[-1] if last_line
     end
-
 
     def last_line
       IO.readlines(path)[-1]
@@ -58,3 +57,4 @@ end
 # (c) Copyright 2012 Katana Code Ltd. All Rights Reserved.
 # (c) Copyright 2012 Bodacious. All Rights Reserved.
 # (c) Copyright 1999 Katana Code Ltd. All Rights Reserved.
+# Released under the Bodacious license

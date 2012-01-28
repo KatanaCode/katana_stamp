@@ -2,7 +2,7 @@ require "spec_helper"
 include ActiveSupport::Inflector
 
 describe KatanaStamp do
-  
+
   DEFAULT_STAMP = '# (c) Copyright 2012 Katana Code Ltd. All Rights Reserved'
 
   before(:each) do
@@ -51,26 +51,46 @@ describe KatanaStamp do
   end  
 
   context 'with include-dirs option' do
-    
+
     it "also stamps paths listed in include_paths" do
       path = 'spec/support/test_dummy_file.rb'
       KatanaStamp.run!(include_paths: [path])
       File.read(path).should include(DEFAULT_STAMP)
     end
-    
+
   end
-  
+
   context 'with exclude-dirs option' do
-    
-    it "doesn't stamp paths listed in exclude_paths" do
-      clear_files
-      path = 'app/models/test_model_two.rb'
+
+    let(:path) { 'app/models/test_model_two.rb' }
+
+    before do
       KatanaStamp.run!(exclude_paths: [path])
+    end
+
+    it "doesn't stamp paths listed in exclude_paths" do
       File.read(path).should_not include(DEFAULT_STAMP)
+    end
+
+    it "it still stamps files that don't match the pattern" do
       file_content.should include(DEFAULT_STAMP)
     end
-    
+
   end
-  
-  
+
+  context 'with message option' do
+    
+    let(:message) { "Released under the Bodacious license" }
+    
+    before do
+      KatanaStamp.run!(message: message)
+    end
+
+    it "overwrites the entire message" do
+      file_content.should include(message)
+      file_content.should_not include(DEFAULT_STAMP)      
+    end
+
+  end
+
 end
