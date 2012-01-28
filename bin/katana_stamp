@@ -9,7 +9,7 @@ require 'optparse'
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = File.read('README.md')
+  opts.banner = "Katana Stamp Usage:"
 
   opts.on("-i", "--include-dirs x,y,x", Array, 
     "Include these dir patterns in stamp list") do |v|
@@ -35,4 +35,4 @@ OptionParser.new do |opts|
   
 end.parse!
 
-KatanaStamp.run!(options)
+exit(KatanaStamp.run!(options))
