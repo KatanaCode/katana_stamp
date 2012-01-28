@@ -2,11 +2,11 @@ module KatanaStamp
   class StampFile
 
     def initialize(path, options)
+      @path              = path      
       @comment_delimiter = options[:comment_delimiter] || '#'
-      @year = options[:year] || Time.now.year
-      @owner = options[:owner] || 'Katana Code Ltd'
-      @path = path
-      @options_message = options[:message]
+      @year              = options[:year] || Time.now.year
+      @owner             = options[:owner] || 'Katana Code Ltd'
+      @options_message   = options[:message]
     end
 
     # Path to this file
