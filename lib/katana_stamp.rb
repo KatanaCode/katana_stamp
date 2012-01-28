@@ -2,6 +2,8 @@ module KatanaStamp
 
   require 'katana_stamp/stamp_file'
   
+  
+  # Look for files matching these dir patterns
   DIR_PATTERS = [ "app/**/*.rb", "lib/**/*.rb" ]
 
   # Stamps all files matching DIR_PATTERNS and the +--include-paths+ option unless they have
