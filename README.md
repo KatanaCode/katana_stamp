@@ -1,5 +1,8 @@
 # Katana Code's Copyright Stamper
 
+This gem is used internally by Katana Code. Feel free to fork it and modify for your 
+own organisation.
+
 ## Usage: 
 
     $ katana_stamp

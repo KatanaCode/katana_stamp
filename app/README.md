@@ -1,0 +1,1 @@
+Files included under `app/` are simply test files used to check for the desired behaviour.

@@ -8,13 +8,17 @@ describe KatanaStamp do
   before(:each) do
     clear_files
   end
+  
+  after(:all) do
+    clear_files
+  end
 
   let(:file_content) { File.read("app/models/test_model_one.rb")  }
 
   context "by default" do
 
     before do
-      KatanaStamp.run!      
+      run_with_options
     end
 
     it 'adds the copyright notice to the bottom of the file if not present' do
@@ -22,7 +26,7 @@ describe KatanaStamp do
     end
 
     it "doesn't add the copyright notice again if it's already there" do
-      KatanaStamp.run! # again
+      run_with_options # again
       file_content.scan(DEFAULT_STAMP).count.should eql(1)
     end
 
@@ -35,7 +39,7 @@ describe KatanaStamp do
   context 'with owner option' do
 
     it 'uses the owner passed' do
-      KatanaStamp.run!(owner: 'Bodacious')
+      run_with_options(owner: 'Bodacious')
       file_content.should include('Bodacious')
     end
 
@@ -44,7 +48,7 @@ describe KatanaStamp do
   context 'with year option' do
 
     it 'uses the year passed' do
-      KatanaStamp.run!(year: '1999')
+      run_with_options(year: '1999')
       file_content.should include('1999')
     end
 
@@ -52,9 +56,13 @@ describe KatanaStamp do
 
   context 'with include-dirs option' do
 
-    it "also stamps paths listed in include_paths" do
-      path = 'spec/support/test_dummy_file.rb'
-      KatanaStamp.run!(include_paths: [path])
+    let(:path) { 'spec/support/test_dummy_file.rb' }
+    
+    before do
+      run_with_options(include_paths: [path])
+    end
+    
+    it "also stamps paths listed in include_paths" do  
       File.read(path).should include(DEFAULT_STAMP)
     end
 
@@ -65,7 +73,7 @@ describe KatanaStamp do
     let(:path) { 'app/models/test_model_two.rb' }
 
     before do
-      KatanaStamp.run!(exclude_paths: [path])
+      run_with_options(exclude_paths: [path])
     end
 
     it "doesn't stamp paths listed in exclude_paths" do
@@ -83,7 +91,7 @@ describe KatanaStamp do
     let(:message) { "Released under the Bodacious license" }
     
     before do
-      KatanaStamp.run!(message: message)
+      run_with_options(message: message)
     end
 
     it "overwrites the entire message" do

@@ -6,15 +6,15 @@ Gem::Specification.new do |s|
   s.name        = "katana_stamp"
   s.version     = KatanaStamp::VERSION
   s.authors     = ["Bodacious"]
-  s.email       = ["gavin@katanacode.com"]
+  s.email       = ["bodacious@katanacode.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A copyright stamping gem}
+  s.description = %q{Adds copyright comments to .rb files within a Ruby application}
 
   s.rubyforge_project = "katana_stamp"
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
