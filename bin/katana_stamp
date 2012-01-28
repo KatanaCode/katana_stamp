@@ -11,6 +11,11 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Katana Stamp Usage:"
 
+  # TODO: Consider this? Is it safe?
+  # opts.on("-f", "--force", "Forceably overwrite any existing stamps") do |v|
+  #   options[:force] = v
+  # end
+
   opts.on("-i", "--include-dirs x,y,x", Array, 
     "Include these dir patterns in stamp list") do |v|
     options[:include_paths] = v

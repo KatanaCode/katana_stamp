@@ -14,6 +14,41 @@ describe KatanaStamp do
   end
 
   let(:file_content) { File.read("app/models/test_model_one.rb")  }
+  
+  context "printing to console" do
+    
+    it "explains file has been stamped if not already" do
+      @orig_stdout = $stdout
+      $stdout = StringIO.new
+      run_with_options
+      $stdout.rewind
+      $stdout.string.chomp.should include("app/models/test_model_one.rb stamped!")
+      $stdout = @orig_stdout    
+    end
+    
+    it "explains file has already been if stamped with the same name" do
+      @orig_stdout = $stdout
+      $stdout = StringIO.new
+      run_with_options
+      run_with_options      
+      $stdout.rewind
+      $stdout.string.chomp.should include("app/models/test_model_one.rb already stamped!")
+      $stdout = @orig_stdout    
+    end
+    
+    it "warns file has already been if stamped with another name" do
+      @orig_stderr = $stderr
+      $stderr = StringIO.new
+      run_with_options
+      run_with_options(owner: "gavin")      
+      $stderr.rewind
+      $stderr.string.chomp.should include("app/models/test_model_one.rb stamped by another owner!")
+      $stderr = @orig_stderr    
+    end
+    
+  end
+  
+  
 
   context "by default" do
 
