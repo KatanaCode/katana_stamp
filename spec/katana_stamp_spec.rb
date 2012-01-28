@@ -6,11 +6,11 @@ describe KatanaStamp do
   DEFAULT_STAMP = '# (c) Copyright 2012 Katana Code Ltd. All Rights Reserved'
 
   before(:each) do
-    clear_files
+    copy_template_files
   end
   
   after(:all) do
-    clear_files
+    copy_template_files
   end
 
   let(:file_content) { File.read("app/models/test_model_one.rb")  }

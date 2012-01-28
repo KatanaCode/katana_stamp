@@ -1,12 +1,8 @@
 require "katana_stamp"
 require "active_support"
-require "fileutils"
 
-def clear_files
-  Dir.glob('spec/templates/**/*.rb') do |path|
-    new_path = path.gsub(/spec\/templates\//, '')
-    FileUtils.cp(path, new_path)
-  end
+def copy_template_files
+  FileUtils.cp_r(Dir.glob("#{File.dirname(__FILE__)}/templates/*"), ".")
 end
 
 def run_with_options(options = {})

@@ -24,3 +24,4 @@ module KatanaStamp
   module_function :run!
 
 end
+# (c) Copyright 2012 Katana Code Ltd. All Rights Reserved.

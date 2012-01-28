@@ -1,3 +1,5 @@
+app/
+spec/support/test_dummy_file.rb
 *.gem
 .bundle
 Gemfile.lock
