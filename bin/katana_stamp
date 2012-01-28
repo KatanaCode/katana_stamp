@@ -1,0 +1,32 @@
+#! /usr/bin/env ruby
+
+lib_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
+
+require 'katana_stamp'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: katana_stamp -i"
+
+  opts.on("-i", "--include-dirs x,y,x", Array, 
+    "Include these dirs or files in stamp list") do |v|
+    options[:include_paths] = v
+  end
+  
+  opts.on("-x", "--exclude-dirs x,y,x", Array, 
+    "Don't include these dirs or files in stamp list") do |v|
+    options[:exclude_paths] = v
+  end
+  
+  opts.on("-y", "--year YEAR", "Year of Copyright") do |v|
+    options[:year] = v
+  end
+  
+  opts.on("-o", "--owner OWNER", "Copyright owner") do |v|
+    options[:owner] = v
+  end
+  
+end.parse!
+KatanaStamp.run!(options)

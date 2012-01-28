@@ -1,0 +1,3 @@
+class TestModelTwo
+  
+end
