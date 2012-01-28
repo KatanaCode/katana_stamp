@@ -3,6 +3,8 @@
 This gem is used internally by Katana Code. Feel free to fork it and modify for your 
 own organisation.
 
+Read [the documentation](http://rubydoc.info/gems/katana_stamp) for more information on what's going on under the hood.
+
 ## Usage: 
 
     $ katana_stamp
