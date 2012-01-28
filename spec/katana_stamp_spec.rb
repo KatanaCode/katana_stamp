@@ -103,18 +103,6 @@ describe KatanaStamp do
 
   end
 
-  context 'with comment-delimiter option' do
-
-    before do
-      run_with_options(comment_delimiter: '# //')
-    end
-
-    it "prepends the comment with specified delimiter instead" do
-      file_content.should include('# // (c) Copyright 2012 Katana Code Ltd. All Rights Reserved')
-    end
-
-  end
-
   context 'with exclude-dirs option' do
 
     let(:path) { 'app/models/test_model_two.rb' }
@@ -127,7 +115,7 @@ describe KatanaStamp do
       File.read(path).should_not include(DEFAULT_STAMP)
     end
 
-    it "still stamps files that don't match the pattern" do
+    it "it still stamps files that don't match the pattern" do
       file_content.should include(DEFAULT_STAMP)
     end
 

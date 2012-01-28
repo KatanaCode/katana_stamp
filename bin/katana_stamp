@@ -38,9 +38,6 @@ OptionParser.new do |opts|
     options[:message] = v
   end
   
-  opts.on("-c", "--comment-delimiter DELIMITER", "Overwrite the entire message.") do |v|
-    options[:comment_delimiter] = v
-  end
 end.parse!
 
 exit(KatanaStamp.run!(options))
