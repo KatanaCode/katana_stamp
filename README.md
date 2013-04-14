@@ -76,3 +76,7 @@ Will stamp:
 
 At the moment there's no way to reverse this... make sure you commit any changes before you
 run this!
+
+## About Katana Code
+
+Katana Code are [iPhone app and Ruby on Rails Developers in Edinburgh, Scotland](http://katanacode.com/ "Katana Code").
